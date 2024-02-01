@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% extends "index_new.html" %}
+{% load static %}
+
+
+ {% block main_content %}
+<main class="main">
+  <div class="jumbotron">
+
+      <div class="container">
+      <img src="{% static '/lms-LOGO.png' %}"  class="rounded float-start" alt="lims" height="200" style="margin-right: 20px;">
+          <hi class="display-4"> Hello, readers! </hi>
+          <p> welcome to City Libary. We have a large collection of books to cater the reading needs of all kinds of readers.</p>
+            <p><a role="button" class="btn btn-primary btn-lg " style="background-color: #d74e8a; border: #d74e8a; "  >Browse our collection >> </a></p>
+      </div>
+  </div>
+
+    <div class="container">
+  <div class="row">
+    <div class="col">
+      <h2>Why reading is important?</h2>
+        <p>Reading is good for you because it improves your focus, memory, empathy, and communication skills.
+        it can reduce stress, improve your mental health, and help you life longer. reading also allows yo to learn new thing to help you succeed
+            in your work and relationships.  </p>
+    </div>
+    <div class="col">
+      <h2>Key Benefits</h2>
+        <p>
+        <ul>
+        <li>increase your vocabulary and comprenhsion skills</li>
+        <li>Reduce Stress</li>
+        <li>improve mental health</li>
+        <li>prevents cognitive decline</li>
+         </ul>
+        </p>
+    </div>
+    <div class="col">
+      <h2>Thought for the day</h2>
+        <p>"Imagination is more important than knowledge. For knowledge is limited,
+            whereas imagination embraces the entire world, stimulating progress,
+            giving birth to evolution." - Albert Einstein:</p>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer class="container">
+    <p> city libray all right reserved</p>
+</footer>
+    {% endblock %}

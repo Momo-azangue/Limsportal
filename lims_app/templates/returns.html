@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+{% extends "index_new.html" %}
+{% load static %}
+
+
+ {% block main_content %}
+ <div class="col-md-8">
+             <h4>Search Reader</h4>
+         </div>
+   <div class="col-md-8 ">
+                  <div class="row">
+                      <nav class="navbar bg-body-light">
+                          <div class="container-fluid justify-content-center align-items-center">
+                            <form class="d-flex" role="search">
+                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-primary" type="submit">Search</button>
+                              </form>
+                          </div>
+  <div class="row" style="margin-top: 20px;">
+                      <p>{{books|length}} Books rental for: </p>
+                  </div>
+                      </nav>
+
+                  </div>
+
+                  <div class="row" style="margin-top: 20px;">
+                      <p>{{readers|length}} readers subscribed.</p>
+                  </div>
+                  <div class="row" style="margin-top: 20px;">
+                      <div class="container" style="overflow-y: auto;height: 400px;">
+
+                          <table class="table table-hover">
+                              <thead>
+                              <tr>
+                              <td>Reader ID</td>
+                              <td>Name</td>
+                              <td>Book</td>
+                              <td>start date</td>
+                                  <td>Return date</td>
+
+                              </tr>
+                              </thead>
+                              <tbody>
+                              {% for read in readers %}
+                                <tr>
+                                    <td>{{reader.id}}</td>
+                                    <td class="returns"
+                                        data-reader="{{Name.reader_return_date_time }}"
+                                          data-="{{ book.reader_return_date_time }}"
+                                          data-="{{ book.reader_return_date_time }}"
+                                          data-="{{ book.reader_return_date_time }}" >
+
+
+
+
+
+                                        {% if reader.active %}
+                                            <span class="btn btn-success">{{reader.returns_return_date_time  }}</span>
+                                        {% else %}
+                                            <span class="btn btn-secondary">{{reader.returns_return_date_time }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{reader.reader_contact}}</td>
+                                      <td>{{reader.reference_id}}</td>
+                                      <td>{{reader.reader_address}}</td>
+                                </tr>
+                              {% endfor %}
+                              </tbody>
+                          </table>
+
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+
+
+      </div>
+
+
+
+
+
+
+  </div>
+
+    {% endblock %}

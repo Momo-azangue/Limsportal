@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+{% extends "index_new.html" %}
+{% load static %}
+
+
+ {% block main_content %}
+
+ <div class="container-flex text-center justify-content-center align-items-center" style="padding-top:20px; padding-bottom: 20px; margin-left: 350px; margin-top: 10px; vertical-align: middle;">
+    <div class="col-md-8 ">
+                  <div class="row ">
+                      <nav class="navbar bg-body-light">
+                          <div class="container-fluid justify-content-center align-items-center">
+                            <form method="get"  action=""  class="d-flex" role="search">
+                                <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-primary" type="submit">Search</button>
+                              </form>
+                          </div>
+
+                      </nav>
+
+                  </div>
+
+                   <button type="button" class="btn btn-primary"  style="margin-top: 40px; " data-toggle="modal" data-target="#uploadModal">
+                      Upload book
+                    </button>
+
+
+
+
+                 <!-- Bouton "Add Book" -->
+         <button
+                 data-book-id ="{{book.id}}"
+                 data-book-titre ="{{book.titre}}"
+                 data-book-auteur="{{book.auteur}}"
+                 data-book-annee_publication="{{book.annee_publication}}"
+                 data-book-isbn="{{book.isbn}}"
+                 data-book-categorie="{{book.categorie}}"
+                 data-book-disponibilite="{{book.disponibilite}}"
+                 data-book-nombre_exemplaires="{{book.nombre_exemplaires}}"
+
+                 type="button" class="add-btn btn btn-success" style="margin-top: 40px; margin-left: 15px;" data-toggle="modal" data-target="#addBookModal">
+                Add Book
+            </button>
+
+
+
+
+
+
+                  <div class="row" style="margin-top: 20px;">
+                      <p>{{books|length}} books availables .</p>
+                  </div>
+
+                      <!--<h4>Résultats de la recherche pour "{{ query }}"</h4>
+                      {% if results %}
+                        <ul>
+                          {% for result in results %}
+                            <li>{{ result.titre }} - {{ result.auteur }}</li>
+                          {% endfor %}
+                        </ul>
+                      {% else %}
+                        <p>Aucun résultat trouvé.</p>
+                      {% endif %}-->
+                  <div class="row" style="margin-top: 20px;">
+                      <div class="container" style="overflow-y: auto;height: 400px;">
+
+                          <table class="table table-hover">
+
+                              <tbody>
+                              {% for book in books %}
+                                <tr>
+                                    <td>{{book.id}}</td>
+
+                                     <td
+                                    class="book_info"
+                                     data-book-id ="{{book.id}}"
+                                     data-book-titre ="{{book.titre}}"
+                                     data-book-auteur="{{book.auteur}}"
+                                     data-book-annee_publication="{{book.annee_publication}}"
+                                     data-book-isbn="{{book.isbn}}"
+                                     data-book-categorie="{{book.categorie}}"
+                                     data-book-disponibilite="{{book.disponibilite}}"
+                                     data-book-nombre_exemplaires="{{book.nombre_exemplaires}}"
+                                    >
+                                         {{book.titre}},
+                                      written by {{book.auteur}},
+                                      categorie {{book.categorie}}, ISBN: {{book.isbn}}</td>
+
+                                   <td>
+                                        {% if book.disponibilite %}
+                                            <span class="btn btn-success add-to-bag"   data-book-id ="{{book.id}}" > <a href="{% url 'add_to_bag' book.id %}" style="color: white; text-decoration: none;">add to bag</a></span>
+                                        {% else %}
+                                            <span  class="btn btn-danger remove-from-bag" data-book-id ="{{book.id}}" > <a href="{% url 'remove_from_bag' book.id %}" style="color: white; text-decoration: none;">Remove</a></span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                              {% endfor %}
+                              </tbody>
+                          </table>
+
+                      </div>
+                  </div>
+              </div>
+ </div>
+<script>
+$(document).ready(function() {
+    $('.add-to-bag, .remove-from-bag').click(function() {
+        const bookId = $(this).data('book-id');
+        const button = $(this);
+
+        // Effectuer le switch entre les états
+        button.toggleClass('btn-success btn-danger');
+
+        // Changer le texte du bouton en fonction de la classe actuelle
+        if (button.hasClass('btn-success')) {
+            button.text('Add to Bag');
+        } else {
+            button.text('Remove');
+        }
+
+        // Autres actions nécessaires
+    });
+});
+
+</script>
+
+
+    {% endblock %}

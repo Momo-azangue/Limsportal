@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+{% extends "index_new.html" %}
+{% load static %}
+
+
+ {% block main_content %}
+
+
+<!--
+ <div class="container-flex text-center justify-content-center align-items-center" style="padding-top:20px; padding-bottom: 25px; margin-top: 10px; vertical-align: middle;">
+
+      <div class="row justify-content-center align-middle" style="margin-top: 10px; height: 60px;">
+       <div class="col-md-4 text-light" style="background-color: #821fe0">
+
+           <h4 style="margin-top: 15px;">Ready for checkout ? </h4>
+
+       </div>
+          <div class="container-flex text-center justify-content-center align-items-center" style="padding-top:10px; padding-bottom: 20px; margin-top: 10px; vertical-align: middle;">
+
+      <div class="row justify-content-center align-middle" style="margin-top: 10px; height: 60px;">
+          <h1 style="margin-top: 15px;">Books in your bag </h1>
+
+  <table class="table table-hover">
+
+                              <tbody>
+                              {% for book in books %}
+                                <tr>
+                                    <td>{{book.id}}</td>
+                                     <td>
+                                        {% if book.disponibilite %}
+                                            <span class="btn btn-success"> add to bag</span>
+                                        {% else %}
+                                            <span  class="btn btn-danger">Remove</span>
+                                        {% endif %}
+                                    </td>
+
+                            {% endfor %}
+
+                                    </table>
+
+    <div class="col-md-8 ">
+          <div class="row" >
+              <div class="col-md-4" >
+                  <div class="container" style="overflow-y:auto; height:600px; background:#85beb1 ">
+
+                  <form class="d-flex" action="/readers/" method="POST">
+                      {% csrf_token %}
+                      <table class="table" style="margin-top: 20px;">
+                         <tr>
+                              <td style="text-align: left; vertical-align: middle; padding-left: 15px;">Readers id:</td>
+                              <td><textarea type="text" class="form-control" name="reader_Readers_id"></textarea> </td>
+                          <tr>
+                              <td colspan="2"><button class="btn btn-primary" type="submit">GO</button></td>
+                          </tr>
+
+                          <tr>
+
+                              <td style="text-align: left; vertical-align: middle; padding-left: 15px;">Name:</td>
+                              <td><input type="text" class="form-control" name="reader_name"></td>
+                          </tr>
+                          <tr>
+                              <td style="text-align: left; vertical-align: middle; padding-left: 15px;">Contact:</td>
+                              <td><input type="text" class="form-control" name="reader_conctact"></td>
+                          </tr>
+                          <tr>
+                              <td style="text-align: left; vertical-align: middle; padding-left: 15px;">Reference ID:</td>
+                              <td><input type="text" class="form-control" name="reader_ref_id"></td>
+                          </tr>
+                              <td style="text-align: left; vertical-align: middle; padding-left: 15px;">STart date & time:</td>
+                              <td><textarea type="time" class="form-control" name="reader_Start_date_&_time"></textarea></td>
+                          </tr>
+                         <tr>
+                              <td style="text-align: left; vertical-align: middle; padding-left: 15px;">Return due date & time:</td>
+                              <td><textarea type="time" class="form-control" name="reader_Return due date & time"></textarea></td>
+                          </tr>
+
+
+
+                      </table>
+                  </form>
+
+                        <ul style="text-align: left; vertical-align: middle; padding-left: 15px;">
+                            <li><small> Readers should not mark,undeline,write,or tear pages or otherwise damage the library documents  </small></li>
+                            <li><small> readers are requested to handle all library property carefully to avoid damage to it and also not to distrub other readers/users </small></li>
+                            <li><small>no library material cna be taken out of the library without permission of the librarian</small></li>
+                          <li><small> four books are issued for maximum of two weeks and they must be returned on or before the vdue date specified above </small></li>
+                        </ul>
+
+                  </div>
+              </div>
+               </div>
+          </div>
+
+      </div>
+    </div>
+      </div>
+         </div>
+
+-->
+
+
+
+  <div class="container-flex text-center justify-content-center align-items-center " style="padding-top:10px; padding-bottom: 20px; margin-top: 0px;  vertical-align: middle; height: 100%; ">
+
+      <div class="row justify-content-center align-middle">
+
+         <div class="col-md-8">
+             <h4>Search Reader</h4>
+         </div>
+       <div class="col-md-4 text-light" style="background-color: #1992e7;  ">
+           <h4 style="margin-top: 15px;">Register New Reader </h4>
+       </div>
+
+          <div class="row" >
+               <div class="col-md-8">
+                  <div class="row">
+                      <nav class="navbar bg-body-light">
+                          <div class="container-fluid justify-content-center align-items-center">
+                            <form class="d-flex" role="search">
+                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-primary" type="submit">Search</button>
+                              </form>
+                          </div>
+
+                      </nav>
+
+                  </div>
+
+
+                  <div class="row" style="margin-top: 20px;">
+                      <div class="container" style="overflow-y: auto;height: 400px;">
+
+                          <table class="table table-hover">
+                              <thead>
+                              <tr>
+                              <td>Titre</td>
+                              <td>Auteur</td>
+                              <td>Année de Publication</td>
+                              <td>ISBN</td>
+                              <td>Catégorie</td>
+                              <td> Disponibilité</td>
+                              <td>Nombre d'exemplaires</td>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              {% for book in mybag_books %}
+                                <tr>
+                                    <td>{{book.titre}}</td>
+                                    <td class="reader-name"
+                                          data-reader-id="{{ reader.id }}"
+                                          data-reader-name="{{ reader.reader_name }}"
+                                          data-reader-contact="{{ reader.reader_contact }}"
+                                          data-reader-reference-id="{{ reader.reference_id }}"
+                                          data-reader-address="{{ reader.reader_address }}" >
+                                        {{book.auteur}}
+                                    </td>
+                                    <td>{{ book.annee_publication }}</td>
+                                      <td>{{ book.isbn }}</td>
+                                      <td> {{ book.categorie }}</td>
+                                     <td> {{ book.disponibilite }}</td>
+                                     <td>{{ book.nombre_exemplaires }}</td>
+                                    <td><span  class="btn btn-danger remove-from-bag" data-book-id ="{{book.id}}" >
+                                        <a href="{% url 'remove_from_bag' book.id %}" style="color: white; text-decoration: none;">Remove</a>
+                                    </span>
+                                    </td>
+                                </tr>
+
+                              {% empty %}
+                             <h1>Your bag is empty.</h1>
+                              {% endfor %}
+                              </tbody>
+                          </table>
+
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-4"  >
+                  <div class="container" style=" height:730px; background:#31fac9 ">
+
+                  <form class="d-flex" action="/readers/add" method="POST">
+                      {% csrf_token %}
+                      <table class="table" style="margin-top: 20px;">
+
+                           <tr>
+                              <td style="text-align: left; vertical-align: middle; padding-left: 15px;">Reader id:</td>
+                              <td><input type="text" class="form-control" name="reader_Readers_id"> </td>
+                          <tr>
+                              <td colspan="2"><button class="btn btn-primary" type="submit">GO</button></td>
+                          </tr>
+
+                          <tr>
+                              <td style="text-align: left; vertical-align: middle; padding-left: 15px;">Name:</td>
+                              <td><input type="text" class="form-control" name="reader_name"></td>
+                          </tr>
+                          <tr>
+                              <td style="text-align: left; vertical-align: middle; padding-left: 15px;">Contact:</td>
+                              <td><input type="text" class="form-control" name="reader_conctact"></td>
+                          </tr>
+                          <tr>
+                              <td style="text-align: left; vertical-align: middle; padding-left: 15px;">Reference ID:</td>
+                              <td><input type="text" class="form-control" name="reader_ref_id"></td>
+                          </tr>
+                          <tr>
+                              <td style="text-align: left; vertical-align: middle; padding-left: 15px;">Address:</td>
+                              <td><textarea type="text" class="form-control" name="reader_address"></textarea> </td>
+                          </tr>
+                            <tr>
+                              <td style="text-align: left; vertical-align: middle; padding-left: 15px;">Start date:</td>
+                              <td><input type="date" class="form-control" name="reader_address"> </td>
+                          </tr>
+                          <tr>
+                              <td style="text-align: left; vertical-align: middle; padding-left: 15px;">Return due  date:</td>
+                              <td><input type="date" class="form-control" name="reader_address"> </td>
+                          </tr>
+                          <tr>
+                              <td colspan="2"><button class="btn btn-primary" type="submit"> Save</button></td>
+                          </tr>
+                      </table>
+                  </form>
+                         <ul style="text-align: left; vertical-align: middle; padding-left: 15px; ">
+                            <li><small> Readers should not mark,undeline,write,or tear pages or otherwise damage the library documents  </small></li>
+                            <li><small> readers are requested to handle all library property carefully to avoid damage to it and also not to distrub other readers/users </small></li>
+                            <li><small>no library material cna be taken out of the library without permission of the librarian</small></li>
+                          <li><small> four books are issued for maximum of two weeks and they must be returned on or before  </small></li>
+                        </ul>
+
+                  </div>
+              </div>
+
+          </div>
+
+
+
+      </div>
+
+
+
+
+
+
+  </div>
+
+
+
+
+
+  {% endblock %}
+
+
